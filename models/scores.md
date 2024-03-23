@@ -11,7 +11,7 @@ FPR = False Positive Rate (FPR): Proportion of incorrectly classified negative i
 
 ROC curve: the FPR v.s. TPR curve
 
-AUC area under the ROC curve when training
+AUC area under the ROC curve when training. AUC < 0.5 means worth than a random classifier. The closer AUC is to 1 the better. 
 
 ```
 
@@ -37,4 +37,14 @@ AUC area under the ROC curve when training
 
 ```
 
-AUC generalize to multica
+AUC generalize to multiclassifications
+
+
+# questions
+
+model is outputing argmax instead of prob
+overfitting
+
+replace original mos and call_key
+why the dataset 4 fails
+resolved == mos_TR
