@@ -14,13 +14,24 @@ class preprocessor():
         return self.les
 
     def process(self,df):
+        print(f'start processing, {df.shape}')
+        df = self.remove_rare_labels(df)
         df = self.process_columns(df)
         df = self.encode_labels(df)
         self.classify_columns(df)
         print(f'finished processing, {df.shape}')
         return df
 
+    def remove_rare_labels(self,df):
+        print(f"removing rare reasons, shape : {df.shape}")
+        vc = df['reason'].value_counts()
+        rare_reasons = vc[vc<5].index
+        df.drop(df[df['reason'].isin(rare_reasons)].index, inplace = True)
+        print(f"removed rare reasons : {rare_reasons}, new shape : {df.shape}")
+        pass
+
     def process_columns(self,df):
+        print(f"processing columns, shape : {df.shape}")
         df = self.process_mos_rough(df)
         #df = self.process_mos_one_hot(df)
         df = self.process_timestamp_call_key(df)
@@ -28,7 +39,7 @@ class preprocessor():
         #df = self.process_account_open_date(df,day = 18)
         df = self.process_resolved(df)
         #df = self.drop_several_columns(df)
-        print("processed columns")
+        print(f"processed columns, new shape : {df.shape}")
         return df  
     
     def drop_several_columns(self,df):

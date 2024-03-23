@@ -21,7 +21,7 @@ def load_data(sample = 0):
     return X,y
 
 def main():
-    X,y = load_data(2000)
+    X,y = load_data()
 
     modelnames = [#"LinearRegression",
                 #"Ridge", 
