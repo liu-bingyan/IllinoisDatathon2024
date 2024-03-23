@@ -1,17 +1,48 @@
-class preprocess():
+import pandas as pd
+from sklearn.preprocessing import StandardScaler, LabelEncoder, OneHotEncoder
+
+class preprocessor():
     def __init__(self):
         pass
+        self.les = []
+        self.num_idx = []
+        self.cat_idx = []
+        self.cat_dim = []
 
     def process(self,df):
+        df = self.process_columns(df)
+        df = self.encode_labels(df)
+        self.classify_columns(df)
+        return df
+
+    def process_columns(self,df):
         df = self.process_mos_rough(df)
         #df = self.process_mos_one_hot(df)
         df = self.process_timestamp_call_key(df)
         #df = self.process_account_open_date(df,day = 13)
         #df = self.process_account_open_date(df,day = 18)
         df = self.process_resolved(df)
-        
-        return df   
+
+        print("new columns : ",df.columns)
+        return df  
     
+    #.....
+    def encode_labels(self,df):
+        for col in df.columns:
+            le = LabelEncoder()
+            self.les.append(le)
+            df[col] = le.fit_transform(df[col])
+        return df
+
+    def classify_columns(self,df):
+        # collect index of categorical columns
+        # collect dimension of each categorical columns
+        # collect index of numerical columns
+        self.num_idx = []
+        self.cat_idx = []
+        self.cat_dim = []
+    
+    ############################## helper functions ########################################
     def process_resolved(self,df):
         df['resolved']= df['resolved'].apply(lambda x : 1 if x =='resolved' else 0)
         return df
@@ -42,3 +73,9 @@ class preprocess():
         df['account_open_day_'+str(day)] = df['account_open_date_'+str(day)+'_march'].dt.day
         df["account_age_years_"+str(day)] = 2024 - df['account_open_date_'+str(day)+'_march'].dt.year
         return df
+    
+
+if __name__ == "__main__":
+    # = pd.read_csv("data.csv")
+    pc = preprocessor()
+    df,num_idx,cat_idx,cat_dim = pc.process(df)

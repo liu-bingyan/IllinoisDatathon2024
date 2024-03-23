@@ -1,3 +1,4 @@
 .ipynb_checkpoints
 .lprof
 __pycache__/
+.ipynb
