@@ -9,6 +9,9 @@ class preprocessor():
         self.num_idx = []
         self.cat_idx = []
         self.cat_dim = []
+    
+    def encoders(self):
+        return self.les
 
     def process(self,df):
         df = self.process_columns(df)
@@ -41,6 +44,8 @@ class preprocessor():
             self.les.append(le)
             df[col] = le.fit_transform(df[col])
         print('encoded labels')
+        print(df.dtypes)
+        print(df.sample(1))
         return df
 
     def classify_columns(self,df):
@@ -94,7 +99,7 @@ class preprocessor():
         return
         
 if __name__ == "__main__":
-    from load_dataframes import load_dataframes
+    from utils.load_dataframes import load_dataframes
     folder_path = r'C:\Users\bingy\Box\Data Set for Competition'
     df = load_dataframes(folder_path)
     pp = preprocessor()
