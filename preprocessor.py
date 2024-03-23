@@ -1,6 +1,7 @@
 import pandas as pd
 from sklearn.preprocessing import StandardScaler, LabelEncoder, OneHotEncoder
 
+
 class preprocessor():
     def __init__(self):
         pass
@@ -13,6 +14,7 @@ class preprocessor():
         df = self.process_columns(df)
         df = self.encode_labels(df)
         self.classify_columns(df)
+        print(f'finished processing, {df.shape}')
         return df
 
     def process_columns(self,df):
@@ -22,9 +24,15 @@ class preprocessor():
         #df = self.process_account_open_date(df,day = 13)
         #df = self.process_account_open_date(df,day = 18)
         df = self.process_resolved(df)
-
-        print("new columns : ",df.columns)
+        #df = self.drop_several_columns(df)
+        print("processed columns")
         return df  
+    
+    def drop_several_columns(self,df):
+        ls = ['serial','call_key','timestamp','account_open_date_18_march','account_open_date_13_march']
+        print("dropping columns : ", ls)
+        df = df.drop(columns =ls)
+        return df
     
     #.....
     def encode_labels(self,df):
@@ -32,6 +40,7 @@ class preprocessor():
             le = LabelEncoder()
             self.les.append(le)
             df[col] = le.fit_transform(df[col])
+        print('encoded labels')
         return df
 
     def classify_columns(self,df):
@@ -49,7 +58,8 @@ class preprocessor():
     
     def process_mos_rough(self,df):
         df['mos_count'] = df['mos'].apply(lambda x: len(x.split(" ")))
-        df['mos_TR'] = df['mos'].apply(lambda x: 1 if 'TR' in x else 0)
+        #df['mos_TR'] = df['mos'].apply(lambda x: 1 if 'TR' in x else 0)
+        df = df.drop(columns = ['mos'])
         return df 
     
     # to be implemented
@@ -65,6 +75,8 @@ class preprocessor():
         df["timestamp_hour"] = (df["timestamp_call_key"].str.slice(start = 6, stop = 8))
         df["timestamp_min"] = (df["timestamp_call_key"].str.slice(start = 8, stop = 10))
         df["call_key"] = (df["timestamp_call_key"].str.slice(start = 11, stop = 21))
+        
+        #df = df.drop(columns = ['timestamp_call_key'])
         return df
     
     def process_account_open_date(self, df, day = 13):
@@ -72,10 +84,23 @@ class preprocessor():
         df['account_open_month_'+str(day)] = df['account_open_date_'+str(day)+'_march'].dt.month
         df['account_open_day_'+str(day)] = df['account_open_date_'+str(day)+'_march'].dt.day
         df["account_age_years_"+str(day)] = 2024 - df['account_open_date_'+str(day)+'_march'].dt.year
+        
         return df
     
-
+    def show_index_info(self):
+        print(f"num index : {self.num_idx}")
+        print(f"cat index : {self.cat_idx}")
+        print(f"cat dim : {self.cat_dim}")
+        return
+        
 if __name__ == "__main__":
-    # = pd.read_csv("data.csv")
-    pc = preprocessor()
-    df,num_idx,cat_idx,cat_dim = pc.process(df)
+    from load_dataframes import load_dataframes
+    folder_path = r'C:\Users\bingy\Box\Data Set for Competition'
+    df = load_dataframes(folder_path)
+    pp = preprocessor()
+    df = pp.process(df)
+
+    print(df.head())
+    print(df.dtypes)
+    #print(df.shape)
+    #pp.show_index_info()

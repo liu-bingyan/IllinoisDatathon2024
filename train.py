@@ -1,5 +1,3 @@
-# load data
-import glob
 import pandas as pd
 from preprocessor import preprocessor
 from models.skmodels import model
@@ -15,8 +13,17 @@ df = pc.process(df)
 y = df['reason']
 X = df.drop(columns = ['reason'])
 
-modelnames = ["LinearRegression","RandomForest","XGBoost"]
-for name in modelnames:
-    if name == "LinearRegression":
-        newmodel = model(name)
-        newmodel.cross_validate(X,y)
+models = model()
+modelnames = [#"LinearRegression",
+              #"Ridge", 
+              #"Lasso",
+              "RandomForest",
+              "XGBoost",
+              "GradientBoosting",
+              "AdaBoost",
+              "DecisionTree"
+              ]
+
+for name in modelnames: 
+    print(f"Training model : {name}")
+    models.cross_validate(name,X, y)
