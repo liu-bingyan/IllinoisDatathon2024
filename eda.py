@@ -13,11 +13,17 @@ def load_dataframes(self, folder_path):
 class EDA():
     def __init__(self, dataframes):
         self.dataframes = dataframes
+    
+    #def show_results(self):
+        # check columns equality
+        # ...
+        # ...
+
     ### some simple EDA functions
     def resolved_to_binary(self):
         for df in self.dataframes:
             df['resolved_binary'] = df['resolved'].apply(lambda x: 1 if x == 'resolved' else 0)
-        return df_copy
+        return df
 
     def check_columns_equality(self, column1, column2):
         for df in self.dataframes:
@@ -32,4 +38,5 @@ class EDA():
         for df in self.dataframes:
             print(df.shape)
 
-eda = EDA(load_dataframes(folder_path))
+if __name__ == "__main__":
+    eda = EDA(load_dataframes(folder_path))

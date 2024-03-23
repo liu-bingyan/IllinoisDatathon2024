@@ -5,7 +5,13 @@ IVR Vision Statement – Quickly identify who is calling and why, and route the
 
 # Problem Statement
 
-In this challenge, participants are tasked with analyzing the relations between call attributes and customer call reasons within the IVR (Interactive Voice Response) system with an emphasis on calls that the IVR could not handle (i.e., floor calls). Your objective is to delve into the provided dataset and use the attributes* to uncover insights:
+In this challenge, participants are tasked with 
+analyzing the relations between call attributes and customer call reasons 
+within the IVR (Interactive Voice Response) system 
+with an emphasis on calls that the IVR could not handle (i.e., floor calls). 
+Your objective is to delve into the provided dataset and use the attributes* to uncover insights.
+
+Available attributes:
  - Digitally Active (eservice_ind = 1)
  - Number of Accounts with Synchrony 
  - Account Open Date
@@ -17,8 +23,13 @@ In this challenge, participants are tasked with analyzing the relations between 
  - Delinquency History (Current vs. Past Due)
 
 The goal is to complete the following:
- - Analyze and identify attribute associations to customer call reasons within the IVR system with an emphasis on calls that the IVR did not resolve (i.e., calls transferred to agent).
- - Understanding the attributes, their relationship to call reasons, and the IVR’s effectiveness to address the call reason, suggest opportunities to improve overall customer experience and satisfaction. We encourage creative approaches in data analysis, visualization, and predictive modeling to address this challenge.
+ - Analyze and identify attribute associations to customer call reasons within the IVR system 
+    with an emphasis on calls that the IVR did not resolve (i.e., calls transferred to agent).
+ - Understanding the attributes, 
+    their relationship to call reasons, 
+    and the IVR’s effectiveness to address the call reason, 
+    suggest opportunities to improve overall customer experience and satisfaction. 
+    We encourage creative approaches in data analysis, visualization, and predictive modeling to address this challenge.
 
 Examples of what to improve: 
  - Adding functionality to the IVR
@@ -27,7 +38,8 @@ Examples of what to improve:
 
 # Divide into pieces
 
-To find out the relationship between call attributes and customer call reasons, one need to know what are the call attributes and what are the possible customer call reasons. 
+To find out the relationship between call attributes and customer call reasons, 
+one need to know what are the call attributes and what are the possible customer call reasons. 
 
 Initial thoughts: 
  - find out for each call reasons, the statistics of the attributes, better with visualizations 
@@ -93,3 +105,7 @@ ebill_enrolled_status_13_march
 ----------------------------------------------------
 times:
 account_open_date_13_march : same
+
+
+### Question
+How to have an emphesis on non-resolvable classes?
