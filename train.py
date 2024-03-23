@@ -5,18 +5,18 @@ from preprocessor import preprocessor
 from models.skmodels import model
 from load_dataframes import load_dataframes
 
-dataframes = load_dataframes(r'C:\Users\bingy\Box\Data Set for Competition')
+df = load_dataframes(r'C:\Users\bingy\Box\Data Set for Competition')
 
 # preprocess
 pc = preprocessor()
-for df in dataframes:
-    df = pc.process(df)
-    
-    y = df['reason']
-    X = df.drop(columns = ['reason'])
+df = pc.process(df)
 
-    modelnames = ["LinearRegression","RandomForest","XGBoost"]
-    for name in modelnames:
-        if name == "LinearRegression":
-            newmodel = model(name)
-            newmodel.cross_validate(X,y)
+# train
+y = df['reason']
+X = df.drop(columns = ['reason'])
+
+modelnames = ["LinearRegression","RandomForest","XGBoost"]
+for name in modelnames:
+    if name == "LinearRegression":
+        newmodel = model(name)
+        newmodel.cross_validate(X,y)
