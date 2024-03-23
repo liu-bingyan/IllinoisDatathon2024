@@ -1,5 +1,3 @@
-# load data
-import glob
 import pandas as pd
 from preprocessor import preprocessor
 from models.skmodels import model
