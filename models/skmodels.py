@@ -46,9 +46,11 @@ class model():
             
             model.fit(X_train, y_train)
 
+            y_pred = model.predict(X_test)
             y_prob = model.predict_proba(X_test)
 
-            scorer.eval(y_test, y_prob,verbose = True)           
+            print(y_test.shape, y_prob.shape)
+            scorer.eval(y_test, y_pred, y_prob,verbose = True)           
 
         scorer.print_results()
         return 
