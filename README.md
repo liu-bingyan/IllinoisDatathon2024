@@ -109,3 +109,7 @@ account_open_date_13_march : same
 
 ### Question
 How to have an emphesis on non-resolvable classes?
+
+
+### TODO
+Figure out the differences between 3 and 4
