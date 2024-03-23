@@ -12,8 +12,19 @@ def load_dataframes(self, folder_path):
 
 class EDA():
     def __init__(self, dataframes):
-        self.dataframes = dataframes    
+        self.dataframes = dataframes
     ### some simple EDA functions
+    def resolved_to_binary(self):
+        for df in self.dataframes:
+            df['resolved_binary'] = df['resolved'].apply(lambda x: 1 if x == 'resolved' else 0)
+        return df_copy
+
+    def check_columns_equality(self, column1, column2):
+        for df in self.dataframes:
+            new_column_name = column1 + "_compare"
+            df[new_column_name] = df.apply(lambda x: 1 if x[column1] == x[column2] else 0, axis=1)
+        return df
+
     def print_types(self):
         for df in self.dataframes:
             print(df.dtypes)
