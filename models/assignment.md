@@ -5,8 +5,8 @@ RidgeRegression
 LassoRegression
 ElasticNetRegression
 
-DecisionTreeRegressor
-XGBoost
-RandamForest
-AdaBoost
-Gradient Boosting Regressor
+DecisionTreeRegressor Bingyan
+XGBoost   Jie
+RandamForest  Jie
+AdaBoost  Wonwoo
+Gradient Boosting Regressor Wonwoo

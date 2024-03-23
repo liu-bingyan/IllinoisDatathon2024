@@ -12,4 +12,5 @@ def load_dataframes(folder_path):
 
 if __name__ == "__main__":
     folder_path = r'C:\Users\bingy\Box\Data Set for Competition'
-    dataframes = load_dataframes(folder_path)
+    df = load_dataframes(folder_path)
+    print(df.shape)
