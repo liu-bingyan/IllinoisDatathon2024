@@ -2,3 +2,4 @@
 .lprof
 __pycache__/
 .ipynb
+data/data.csv
