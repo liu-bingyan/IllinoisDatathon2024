@@ -46,12 +46,9 @@ class model():
             
             model.fit(X_train, y_train)
 
-            y_prob = model.predict(X_test)
+            y_prob = model.predict_proba(X_test)
 
             scorer.eval(y_test, y_prob,verbose = True)           
 
-        scores = np.array(scores)
-        print("Average ACC: {:.4f} pm {:.4f}".format(scores.mean(), scores.std()))
-        
         scorer.print_results()
         return 

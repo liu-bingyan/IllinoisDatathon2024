@@ -37,7 +37,7 @@ class preprocessor():
         df = df.drop(columns =ls)
         return df
     
-    #.....
+    #..... need to be improved : 13+18 together
     def encode_labels(self,df):
         for col in df.columns:
             le = LabelEncoder()

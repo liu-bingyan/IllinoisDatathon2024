@@ -24,7 +24,7 @@ class Scorers():
             print(f"roc_auc : {self.roc_auc[-1]}")
         pass
     
-    def print_scores(self,y_true, y_pred):
+    def print_scores(self):
         print(f"accuracy : {np.array(self.accuracys).mean(), np.array(self.accuracys).std()}")
         print(f"f1 : {np.array(self.f1s).mean(), np.array(self.f1s).std()}")
         print(f"log_loss : {np.array(self.log_losses).mean(), np.array(self.log_losses).std()}")
