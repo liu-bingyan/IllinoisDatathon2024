@@ -57,3 +57,39 @@ my personal experiences includes IVR uncomprehensible, menus too long, not inclu
 from online and see what people says.
 
 
+
+## Preprocess
+
+timestamp_call_key: split into two column timestemp call_key
+timestamp split into : day, hour, minute
+ 
+mos : count total number of reasons
+mos : if it has transfer 
+mos : one-hot-encoder available (use or not?)
+
+resolved : 1
+floor : 0
+
+for the rest: compare between start data and end date
+
+numbers:
+account_balance_13_march
+no_of_accounts_with_syf_18_march
+
+binary:
+eservice_ind_13_march
+auto_pay_enrolled_status_13_march
+
+objects:
+account_status_13_march
+
+------------------------------------
+object:
+delinquency_history_13_march
+card_activation_status_13_march
+ebill_enrolled_status_13_march
+
+
+----------------------------------------------------
+times:
+account_open_date_13_march : same
