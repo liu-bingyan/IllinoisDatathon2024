@@ -1,0 +1,7 @@
+,accuracy,f1,log_loss,roc_auc
+DecisionTree_mean,65.9%,58.0%,1.302,64.9%
+DecisionTree_std,0.0%,0.0%,0.001,0.4%
+RandomForest_mean,64.6%,54.2%,1.306,69.4%
+RandomForest_std,0.1%,0.2%,0.001,0.5%
+XGBoost_mean,68.0%,61.2%,1.122,80.1%
+XGBoost_std,0.0%,0.1%,0.001,0.4%

@@ -110,8 +110,6 @@ class preprocessor():
         if self.debug:
             print(f"        added numerical columns : {self.numerical_columns}")
             print(f"        added categorical columns : {self.categorical_columns}")
-        
-
         return df
     
     def process_na(self,df):

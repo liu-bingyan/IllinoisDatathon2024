@@ -5,7 +5,7 @@ import pickle
 
 
 class preprocessor():
-    def __init__(self,mode = 'drop',debug = False,onehot=False):
+    def __init__(self,mode = 'drop',debug = True, onehot=False):
         self.debug = debug
         self.onehot = onehot
         self.mos_mode = mode
