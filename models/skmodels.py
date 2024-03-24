@@ -3,6 +3,7 @@ from models.scorer import Scorers
 from sklearn.linear_model import LinearRegression, Ridge, Lasso
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier,AdaBoostClassifier
 from xgboost import XGBClassifier
+from lightgbm import LGBMClassifier
 from sklearn.tree import DecisionTreeClassifier
 import numpy as np
 
@@ -16,15 +17,17 @@ def name2model(name):
     if name == "Lasso":
         return Lasso()
     if name == "DecisionTree":
-        return DecisionTreeClassifier()
+        return DecisionTreeClassifier(max_depth=5, min_samples_leaf=10)
     if name == "AdaBoost":
-        return AdaBoostClassifier()
+        return AdaBoostClassifier(n_estimators=100, random_state=42)
     if name == "GradientBoosting":
-        return GradientBoostingClassifier()
+        return GradientBoostingClassifier(n_estimators=100, max_depth=5, min_samples_leaf=10)
     if name == "RandomForest":
-        return RandomForestClassifier()
+        return RandomForestClassifier(n_estimators=100, max_depth=5, min_samples_leaf=10)
     if name == "XGBoost":
-        return XGBClassifier()
+        return XGBClassifier(n_estimators=100, max_depth=5, min_child_weight=1)
+    if name == "LightGBM":
+        return LGBMClassifier(n_estimators=100, max_depth=5)
     raise ValueError("Model name not found")
 
 class model():
@@ -45,12 +48,14 @@ class model():
             model = name2model(modelname)
             
             model.fit(X_train, y_train)
+            #print(X_train.iloc[:5,:],y_train.iloc[:5])
 
             y_pred = model.predict(X_test)
             y_prob = model.predict_proba(X_test)
 
-            print(y_test.shape, y_prob.shape)
+            #print(f"y_porb_sum : {y_prob[:5,:].sum(axis=1)}")
             scorer.eval(y_test, y_pred, y_prob,verbose = True)           
 
-        scorer.print_results()
+        scorer.save_results(name = modelname)
         return 
+    

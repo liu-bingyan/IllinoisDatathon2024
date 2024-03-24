@@ -3,6 +3,12 @@ from utils.preprocessor import preprocessor
 from models.skmodels import model
 from utils.load_dataframes import load_dataframes
 
+import warnings
+
+# Ignore all warnings
+warnings.filterwarnings("ignore", category=UserWarning) 
+
+
 def write_dataframes():
     df = load_dataframes(r'C:\Users\bingy\Box\Data Set for Competition') # change this to your own path
     df.to_csv("data/data.csv", index = False)
@@ -21,7 +27,7 @@ def load_data(sample = 0):
     return X,y
 
 def main():
-    X,y = load_data()
+    X,y = load_data(100000)
 
     modelnames = [#"LinearRegression",
                 #"Ridge", 
@@ -30,7 +36,8 @@ def main():
                 #"XGBoost",
                 #"GradientBoosting",
                 #"AdaBoost",
-                "DecisionTree"
+                #"DecisionTree"
+                "LightGBM"
                 ]
 
     models = model()

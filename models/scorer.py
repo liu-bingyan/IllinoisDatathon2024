@@ -32,12 +32,13 @@ class Scorers():
         print(f"accuracy : {self.accuracys[-1]}", f"f1 : {self.f1s[-1]}", f"log_loss : {self.log_losses[-1]}", f"roc_auc : {self.roc_auc[-1]}")
         pass
 
-    def print_scores(self):
+    def print_results(self):
         print(f"accuracy : {np.array(self.accuracys).mean(), np.array(self.accuracys).std()}")
         print(f"f1 : {np.array(self.f1s).mean(), np.array(self.f1s).std()}")
         print(f"log_loss : {np.array(self.log_losses).mean(), np.array(self.log_losses).std()}")
         print(f"roc_auc : {np.array(self.roc_auc).mean(), np.array(self.roc_auc).std()}")
         pass
+    
     def save_results(self,name):
         df =pd.DataFrame(columns = ["accuracy","f1","log_loss","roc_auc"])
         df["accuracy"] = self.accuracys
