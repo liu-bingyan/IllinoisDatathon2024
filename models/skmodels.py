@@ -6,6 +6,9 @@ from xgboost import XGBClassifier
 from lightgbm import LGBMClassifier
 from sklearn.tree import DecisionTreeClassifier
 import numpy as np
+from datetime import datetime
+import joblib
+import pickle
 
 ModelNames = ["LinearRegression","Ridge", "Lasso","RandomForest","XGBoost","GradientBoosting","AdaBoost","DecisionTree"] 
 
@@ -35,7 +38,7 @@ class model():
         self.k = kfold
         pass
     
-    def cross_validate(self,modelname,X,y):
+    def cross_validate(self,modelname,mode,X,y):
 
         scorer = Scorers()
         
@@ -53,9 +56,16 @@ class model():
             y_pred = model.predict(X_test)
             y_prob = model.predict_proba(X_test)
 
+            self.save_model(model,path ="results/models",modelname=modelname,mode=mode)
+
             #print(f"y_porb_sum : {y_prob[:5,:].sum(axis=1)}")
             scorer.eval(y_test, y_pred, y_prob,verbose = True)           
 
-        scorer.save_results(name = modelname)
+        scorer.save_results(name = modelname,mode=mode)
         return 
     
+    def save_model(self, model, path,modelname,mode):
+        timestr = str(datetime.now()).replace(":", "_")
+        path = path + "/" + modelname + "_" + mode + "_" + timestr+".pkl"
+        with open(path, 'wb') as file:
+            pickle.dump(model, file)
