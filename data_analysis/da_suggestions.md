@@ -17,3 +17,11 @@ Suggestions for DA team:
  seperate observation and conclusions
  -for observation, write code to verify if it is statistical true : for example, if you observed TR at mos end will result in a floor call, did you check all the datas and verify this?
  -for conclusions, write in a seperate presentable file (maybe jupyter notebook/markdown file/txt or word file) to clearly state your findings, make sure use observations to support your statement  
+
+
+# questions
+remove frequent reasons
+remove rare reasons
+reasons in MOS code 
+TR and floor
+3 and 4 
