@@ -13,31 +13,35 @@ def write_dataframes():
     df = load_dataframes(r'C:\Users\bingy\Box\Data Set for Competition') # change this to your own path
     df.to_csv("data/data.csv", index = False)
 
-def load_data(sample = 0):
-    if sample==0:
-        df = pd.read_csv("data/data.csv")
+def load_data(preprocess = False, mode = 'drop'):
+    if not preprocess:
+        path = "data/data.csv" 
     else:
-        df = pd.read_csv("data/data.csv", nrows = sample)
+        path = "data/data_preprocessed_"+mode+".csv"
 
-    pc = preprocessor()
-    df = pc.process(df)
+    df = pd.read_csv(path)
+
+    if not preprocess:
+        pc = preprocessor(mode=mode)
+        df = pc.process(df)
+        pc.save_files(df)
+
     y = df['reason']
     X = df.drop(columns = ['reason'])
     print(f"Data loaded, X.shape : {X.shape}, y.shape : {y.shape}")
     return X,y
 
-def main():
-    X,y = load_data(100000)
-
+def main(preprocess = False,mode='drop'):
+    X,y = load_data(preprocess = preprocess,mode=mode)
+    
     modelnames = [#"LinearRegression",
                 #"Ridge", 
                 #"Lasso",
                 #"RandomForest",
-                #"XGBoost",
+                "XGBoost",
                 #"GradientBoosting",
                 #"AdaBoost",
                 #"DecisionTree"
-                "LightGBM"
                 ]
 
     models = model()
@@ -47,4 +51,6 @@ def main():
     
 
 if __name__ == "__main__":
-    main()
+    main(preprocess = True,mode = 'drop')
+
+    
